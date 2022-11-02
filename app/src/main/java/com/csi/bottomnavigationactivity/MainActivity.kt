@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.csi.bottomnavigationactivity.databinding.ActivityMainBinding
+import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Timber.e("OnCreate")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -34,4 +35,28 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
+    override fun onStart() {
+        super.onStart()
+        Timber.e("OnStart()")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.e("OnResume()")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.e("onPause()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.e("onStop()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.e("onDestroy()")
+    }
 }
