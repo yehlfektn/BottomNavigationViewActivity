@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         Timber.e("onCreateView()")
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
