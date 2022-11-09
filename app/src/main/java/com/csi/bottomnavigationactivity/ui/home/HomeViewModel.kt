@@ -1,28 +1,23 @@
 package com.csi.bottomnavigationactivity.ui.home
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.csi.bottomnavigationactivity.db.Note
 import com.csi.bottomnavigationactivity.db.NoteDatabase
 import com.csi.bottomnavigationactivity.repository.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+class HomeViewModel(private val repository: NoteRepository) : ViewModel() {
 
     // on below line we are creating a variable
     // for our all notes list and repository
     val allNotes: LiveData<List<Note>>
-    private val repository: NoteRepository
+
 
     // on below line we are initializing
     // our dao, repository and all notes
     init {
-        val dao = NoteDatabase.getDatabase(application).getNotesDao()
-        repository = NoteRepository(dao)
         allNotes = repository.allNotes
     }
 

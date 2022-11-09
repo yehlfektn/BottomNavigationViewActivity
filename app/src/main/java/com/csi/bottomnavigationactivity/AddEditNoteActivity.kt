@@ -7,9 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.csi.bottomnavigationactivity.db.Note
 import com.csi.bottomnavigationactivity.ui.home.HomeViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,19 +22,13 @@ class AddEditNoteActivity : AppCompatActivity() {
 
     // on below line we are creating variable for
     // viewmodal and and integer for our note id.
-    lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel by viewModel<HomeViewModel>()
     var noteID = -1;
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_note)
-
-        // on below line we are initialing our view modal.
-        homeViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[HomeViewModel::class.java]
 
         // on below line we are initializing all our variables.
         noteTitleEdt = findViewById(R.id.idEdtNoteName)
