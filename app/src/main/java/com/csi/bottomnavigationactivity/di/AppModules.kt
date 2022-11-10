@@ -6,12 +6,13 @@ import com.csi.bottomnavigationactivity.db.NoteDatabase
 import com.csi.bottomnavigationactivity.db.NotesDao
 import com.csi.bottomnavigationactivity.repository.NoteRepository
 import com.csi.bottomnavigationactivity.ui.home.HomeViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 
 val appModule = module {
     single { NoteRepository(get()) }
-    single { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get()) }
 }
 
 val databaseModule = module {
