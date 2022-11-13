@@ -39,6 +39,13 @@ class HomeFragment : Fragment(), NoteClickInterface, NoteClickDeleteInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //CallMovies as an Example
+        homeViewModel.getMovies("Hello")
+        //ObserveMovieResult
+        homeViewModel.movieResult.observe(viewLifecycleOwner, Observer {
+            showToast(it.Search.toString())
+        })
+
         // on below line we are initializing our adapter class.
         val noteRVAdapter = NoteRVAdapter(this, this)
 

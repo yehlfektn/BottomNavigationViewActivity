@@ -1,25 +1,31 @@
 package com.csi.bottomnavigationactivity.ui.home
 
-import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.csi.bottomnavigationactivity.db.Note
-import com.csi.bottomnavigationactivity.db.NoteDatabase
+import com.csi.bottomnavigationactivity.network.IMDBResult
+import com.csi.bottomnavigationactivity.repository.IMDBRepository
 import com.csi.bottomnavigationactivity.repository.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import timber.log.Timber
 
-class HomeViewModel(private val repository: NoteRepository) : ViewModel() {
+class HomeViewModel(
+    private val repository: NoteRepository,
+    private val imdbRepository: IMDBRepository
+) : ViewModel() {
 
     // on below line we are creating a variable
     // for our all notes list and repository
-    val allNotes: LiveData<List<Note>>
+    val allNotes: LiveData<List<Note>> = repository.allNotes
 
-
-    // on below line we are initializing
-    // our dao, repository and all notes
-    init {
-        allNotes = repository.allNotes
-    }
+    private val _movieResult = MutableLiveData<IMDBResult>()
+    val movieResult: LiveData<IMDBResult> = _movieResult
 
     // on below line we are creating a new method for deleting a note. In this we are
     // calling a delete method from our repository to delete our note.
@@ -42,6 +48,21 @@ class HomeViewModel(private val repository: NoteRepository) : ViewModel() {
     fun addNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insert(note)
+        }
+    }
+
+    fun getMovies(search: String) {
+        viewModelScope.launch {
+            imdbRepository.getMovies(search).enqueue(object : Callback<IMDBResult> {
+                override fun onResponse(call: Call<IMDBResult>, response: Response<IMDBResult>) {
+                    _movieResult.value = response.body()
+                    Timber.e("GetMovies: ${response.body()}")
+                }
+
+                override fun onFailure(call: Call<IMDBResult>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
         }
     }
 }

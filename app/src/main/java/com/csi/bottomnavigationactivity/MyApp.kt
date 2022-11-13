@@ -3,6 +3,7 @@ package com.csi.bottomnavigationactivity
 import android.app.Application
 import com.csi.bottomnavigationactivity.di.appModule
 import com.csi.bottomnavigationactivity.di.databaseModule
+import com.csi.bottomnavigationactivity.di.networkModule
 import com.csi.bottomnavigationactivity.utils.debug
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -22,7 +23,7 @@ class MyApp : Application() {
             debug {
                 androidLogger(Level.ERROR)
             }
-            modules(listOf(appModule, databaseModule))
+            modules(listOf(appModule, databaseModule, networkModule))
         }
     }
 }
