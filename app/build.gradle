@@ -15,12 +15,37 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "YOUR_TOKEN", '"MY_TOKEN"')
+    }
+    flavorDimensions "version"
+    productFlavors {
+        free {
+            dimension "version"
+            applicationId = "free"
+            resValue "string", "app_name", "Free BottomNavigation App"
+            buildConfigField("String", "MAIN_URL", '"https://www.omdbapi.com/"')
+        }
+        paid {
+            dimension "version"
+            applicationId = "paid"
+            resValue "string", "app_name", "Paid BottomNavigation App"
+            buildConfigField("String", "MAIN_URL", '"https://www.paid.omdbapi.com/"')
+        }
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+            buildConfigField("String", "MAIN_URL_DEBUG", '"https://www.debug.omdbapi.com/"')
+        }
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "MAIN_URL_RELEASE", '"https://www.release.omdbapi.com/"')
         }
     }
     compileOptions {
