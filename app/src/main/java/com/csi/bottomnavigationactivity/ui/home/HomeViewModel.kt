@@ -60,7 +60,7 @@ class HomeViewModel(
                 }
 
                 override fun onFailure(call: Call<IMDBResult>, t: Throwable) {
-                    TODO("Not yet implemented")
+
                 }
             })
         }
