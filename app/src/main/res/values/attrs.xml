@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AnimatedButtonView">
+        <attr name="btn_color" format="color" />
+        <attr name="btn_style" format="enum">
+            <enum name="no_button" value="0"/>
+            <enum name="text_button" value="1"/>
+            <enum name="button" value="2"/>
+            <enum name="icon_button" value="3"/>
+        </attr>
+        <attr name="btn_text" format="string"/>
+    </declare-styleable>
+</resources>
