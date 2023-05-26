@@ -36,13 +36,15 @@ class MoviesFragment : Fragment() {
         // on below line we are setting
         // adapter to our recycler view.
         binding.notesRV.adapter = moviesAdapter
-        //CallMovies
-        moviesViewModel.getMovies("Hello")
         moviesViewModel.movieResult.observe(viewLifecycleOwner) { list ->
             list?.let {
                 // on below line we are updating our list.
                 moviesAdapter.updateList(it.Search)
             }
+        }
+
+        binding.moviesButton.setOnClickListener {
+            moviesViewModel.getMovies(binding.moviePrompt.text.toString())
         }
     }
 }
