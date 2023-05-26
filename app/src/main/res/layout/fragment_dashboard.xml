@@ -153,7 +153,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:btn_color="@color/black"
-            app:btn_text="AnimatedButtonView" />
+            app:btn_text="AnimatedButtonView"
+            app:btn_style="button"/>
 
     </LinearLayout>
 </ScrollView>

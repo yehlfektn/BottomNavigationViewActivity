@@ -16,8 +16,7 @@ import retrofit2.Response
 import timber.log.Timber
 
 class HomeViewModel(
-    private val repository: NoteRepository,
-    private val imdbRepository: IMDBRepository
+    private val repository: NoteRepository
 ) : ViewModel() {
 
     // on below line we are creating a variable
@@ -48,21 +47,6 @@ class HomeViewModel(
     fun addNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insert(note)
-        }
-    }
-
-    fun getMovies(search: String) {
-        viewModelScope.launch {
-            imdbRepository.getMovies(search).enqueue(object : Callback<IMDBResult> {
-                override fun onResponse(call: Call<IMDBResult>, response: Response<IMDBResult>) {
-                    _movieResult.value = response.body()
-                    Timber.e("GetMovies: ${response.body()}")
-                }
-
-                override fun onFailure(call: Call<IMDBResult>, t: Throwable) {
-
-                }
-            })
         }
     }
 }

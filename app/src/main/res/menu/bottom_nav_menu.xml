@@ -7,6 +7,11 @@
         android:title="@string/app_name" />
 
     <item
+        android:id="@+id/navigation_movies"
+        android:icon="@drawable/baseline_movie_24"
+        android:title="@string/title_movies" />
+
+    <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard" />

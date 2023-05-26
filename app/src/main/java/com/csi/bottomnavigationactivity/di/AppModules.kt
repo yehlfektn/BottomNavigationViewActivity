@@ -10,6 +10,7 @@ import com.csi.bottomnavigationactivity.network.UrlProvider
 import com.csi.bottomnavigationactivity.repository.IMDBRepository
 import com.csi.bottomnavigationactivity.repository.NoteRepository
 import com.csi.bottomnavigationactivity.ui.home.HomeViewModel
+import com.csi.bottomnavigationactivity.ui.movies.MoviesViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -22,7 +23,8 @@ import java.util.concurrent.TimeUnit
 val appModule = module {
     single { NoteRepository(get()) }
     single { IMDBRepository(get()) }
-    viewModel { HomeViewModel(get(), get()) }
+    viewModel { HomeViewModel(repository = get()) }
+    viewModel { MoviesViewModel(imdbRepository = get()) }
 }
 
 val databaseModule = module {
