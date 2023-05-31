@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.csi.bottomnavigationactivity.ui.home.HomeFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_exampleFragment"
+            app:destination="@id/exampleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_movies"
@@ -28,4 +32,18 @@
         android:name="com.csi.bottomnavigationactivity.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/exampleFragment"
+        android:name="com.csi.bottomnavigationactivity.ui.example.ExampleFragment"
+        android:label="ExampleFragment"
+        tools:layout="@layout/fragment_example">
+        <action
+            android:id="@+id/action_exampleFragment_to_secondExampleFragment"
+            app:destination="@id/secondExampleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondExampleFragment"
+        android:name="com.csi.bottomnavigationactivity.ui.example.SecondExampleFragment"
+        android:label="SecondExampleFragment"
+        tools:layout="@layout/fragment_example"/>
 </navigation>

@@ -1,13 +1,18 @@
 package com.csi.bottomnavigationactivity.ui.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.csi.bottomnavigationactivity.AddEditNoteActivity
+import com.csi.bottomnavigationactivity.R
 import com.csi.bottomnavigationactivity.databinding.FragmentHomeBinding
 import com.csi.bottomnavigationactivity.db.Note
 import com.csi.bottomnavigationactivity.utils.NoteClickDeleteInterface
@@ -60,6 +65,17 @@ class HomeFragment : Fragment(), NoteClickInterface, NoteClickDeleteInterface {
             // and opening a new intent to add a new note.
             val intent = Intent(requireContext(), AddEditNoteActivity::class.java)
             startActivity(intent)
+        }
+
+        val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){
+                uri ->
+            Glide.with(requireContext())
+                .load(uri)
+                .into(binding.image)
+        }
+
+        binding.startActivity.setOnClickListener {
+            findNavController().navigate(R.id.exampleFragment)
         }
     }
 
