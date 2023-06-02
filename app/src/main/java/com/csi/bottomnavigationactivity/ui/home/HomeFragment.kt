@@ -15,6 +15,7 @@ import com.csi.bottomnavigationactivity.AddEditNoteActivity
 import com.csi.bottomnavigationactivity.R
 import com.csi.bottomnavigationactivity.databinding.FragmentHomeBinding
 import com.csi.bottomnavigationactivity.db.Note
+import com.csi.bottomnavigationactivity.service.MyService
 import com.csi.bottomnavigationactivity.utils.NoteClickDeleteInterface
 import com.csi.bottomnavigationactivity.utils.NoteClickInterface
 import com.csi.bottomnavigationactivity.utils.NoteRVAdapter
@@ -73,9 +74,13 @@ class HomeFragment : Fragment(), NoteClickInterface, NoteClickDeleteInterface {
                 .load(uri)
                 .into(binding.image)
         }
+        val intent = Intent(requireContext(), MyService::class.java)
 
-        binding.startActivity.setOnClickListener {
-            findNavController().navigate(R.id.exampleFragment)
+        binding.startService.setOnClickListener {
+            requireActivity().startService(intent)
+        }
+        binding.stopService.setOnClickListener {
+            requireActivity().stopService(intent)
         }
     }
 
