@@ -19,7 +19,11 @@
         android:id="@+id/navigation_movies"
         android:name="com.csi.bottomnavigationactivity.ui.movies.MoviesFragment"
         android:label="@string/title_movies"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_movies_to_moviesDetailFragment"
+            app:destination="@id/moviesDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -46,4 +50,8 @@
         android:name="com.csi.bottomnavigationactivity.ui.example.SecondExampleFragment"
         android:label="SecondExampleFragment"
         tools:layout="@layout/fragment_example"/>
+    <fragment
+        android:id="@+id/moviesDetailFragment"
+        android:name="com.csi.bottomnavigationactivity.ui.movies.MoviesDetailFragment"
+        android:label="MoviesDetailFragment" />
 </navigation>

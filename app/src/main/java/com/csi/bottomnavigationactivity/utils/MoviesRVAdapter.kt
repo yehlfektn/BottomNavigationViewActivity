@@ -14,7 +14,9 @@ import com.csi.bottomnavigationactivity.db.Note
 import com.csi.bottomnavigationactivity.network.IMDBResult
 import com.csi.bottomnavigationactivity.network.Search
 
-class MoviesRVAdapter() :
+class MoviesRVAdapter(
+    private val onClickListener: (Search) -> Unit
+) :
     RecyclerView.Adapter<MoviesRVAdapter.ViewHolder>() {
 
     // on below line we are creating a
@@ -28,6 +30,7 @@ class MoviesRVAdapter() :
         val title: TextView = itemView.findViewById(R.id.title)
         val description: TextView = itemView.findViewById(R.id.description)
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        val root: View = itemView.findViewById(R.id.root)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,6 +51,10 @@ class MoviesRVAdapter() :
         Glide.with(holder.imageView.context)
             .load(item.Poster)
             .into(holder.imageView)
+
+        holder.root.setOnClickListener{
+            onClickListener.invoke(item)
+        }
     }
 
     override fun getItemCount(): Int {
